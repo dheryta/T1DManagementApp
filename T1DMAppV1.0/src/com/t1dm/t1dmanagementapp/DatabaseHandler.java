@@ -29,6 +29,8 @@ public class DatabaseHandler {
 	// Table Names
 
 	private static final String TBL_USER = "user";
+	
+	private static final String TBL_FOODS = "foods";
 
 	private static final String TBL_ACTIVITIES = "activities";
 
@@ -80,7 +82,14 @@ public class DatabaseHandler {
 			+ "(UID INTEGER PRIMARY KEY, NAME TEXT, AGE INTEGER, EMAIL TEXT, DrNAME TEXT, "
 
 			+ "DrPHONE TEXT, ADDRESS TEXT, EMERGENCY TEXT, DUMMY INTEGER, USEAUDIO BOOLEAN, EMERGENCY_ENABLED BOOLEAN)";
+	
+	private static final String CREATE_TBL_FOODS = "CREATE TABLE  IF NOT EXISTS "
 
+			+ TBL_FOODS
+
+			+ "(FID INTEGER PRIMARY KEY, FOOD_NAME TEXT, QTY TEXT, CARBS INTEGER, CALORIES INTEGER, GI INTEGER, GL INTEGER)";
+
+	
 	private static final String CREATE_TBL_ACTIVITIES = "CREATE TABLE  IF NOT EXISTS "
 
 			+ TBL_ACTIVITIES + "(AID INTEGER PRIMARY KEY, ACTIVITY_NAME TEXT)";
@@ -89,8 +98,9 @@ public class DatabaseHandler {
 
 			+ TBL_ACTIVITY_MEAL
 
-			+ "(AID INTEGER PRIMARY KEY, ACTIVITY_SUBTYPE TEXT, ACTIVITY_TIME TEXT)";
+			+ "(AID INTEGER PRIMARY KEY, ACTIVITY_SUBTYPE TEXT, ACTIVITY_TIME TEXT, FOOD_DETAILS TEXT)";
 
+	
 	private static final String CREATE_TBL_ACTIVITY_INSULIN = "CREATE TABLE  IF NOT EXISTS "
 
 			+ TBL_ACTIVITY_INSULIN
@@ -229,6 +239,8 @@ public class DatabaseHandler {
 		T1DM_Database.execSQL(CREATE_TBL_USER_PROFILING);
 
 		T1DM_Database.execSQL(CREATE_TBL_INSULIN_DOSAGE);
+		
+		T1DM_Database.execSQL(CREATE_TBL_FOODS);
 
 	}
 
@@ -258,6 +270,51 @@ public class DatabaseHandler {
 
 	}
 
+	private long loadAllFoods(){
+		long retVal = 1;
+		//Read csv and load all values in table foods
+		return retVal;
+	}
+	
+	public List<FoodModel> getMatchingFoodItems(String foodName){
+		List<FoodModel> matchingFoods = new ArrayList<FoodModel>();
+		//TODO: Search table foods for matching foodname
+		if (foodName.contains("D")){
+		for (int i=0;i<5;i++){
+			FoodModel m = new FoodModel();
+			m.set_Calories(100);
+			m.set_Carbs(100);
+			m.set_FoodName("Dummy");
+			m.set_GI(i+70);
+			m.set_GL(10);
+			m.set_Quantity("100g");
+			matchingFoods.add(m);
+		}}
+		if (foodName.contains("F")){
+		for (int i=0;i<5;i++){
+			FoodModel m = new FoodModel();
+			m.set_Calories(100);
+			m.set_Carbs(100);
+			m.set_FoodName("Fruits");
+			m.set_GI(i+40);
+			m.set_GL(10);
+			m.set_Quantity("100g");
+			matchingFoods.add(m);
+		}}
+		if (foodName.contains("C")){
+		for (int i=0;i<5;i++){
+			FoodModel m = new FoodModel();
+			m.set_Calories(100);
+			m.set_Carbs(100);
+			m.set_FoodName("Chinese");
+			m.set_GI(i+150);
+			m.set_GL(10);
+			m.set_Quantity("100g");
+			matchingFoods.add(m);
+		}}
+		return matchingFoods;
+	}
+	
 	// Returns 1 on success else 0
 
 	public long insertUser(UserDetails userDetails) {
@@ -1196,7 +1253,8 @@ public class DatabaseHandler {
 						&& getRecordCount(TBL_ACTIVITY_SLEEP) > 0
 						&& getRecordCount(TBL_SUGGESTIONS) > 0
 						&& getRecordCount(TBL_USER_PROFILING) > 0
-						&& getRecordCount(TBL_INSULIN_DOSAGE) > 0)
+						&& getRecordCount(TBL_INSULIN_DOSAGE) > 0
+						&& loadAllFoods() > 0)
 
 					status = true;
 

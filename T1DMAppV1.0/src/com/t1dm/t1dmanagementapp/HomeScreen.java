@@ -28,7 +28,7 @@ import android.widget.SlidingDrawer.OnDrawerOpenListener;
 @SuppressWarnings("deprecation")
 public class HomeScreen extends TabActivity implements OnClickListener {
  
-	private Tab tab1, tab2, tab3;
+	
 	private SlidingDrawer slidingDrawer;
 	private Button slideButton;
 	private ListView listview ;
@@ -54,6 +54,7 @@ public class HomeScreen extends TabActivity implements OnClickListener {
         TabHost.TabSpec tab3 = tabHost.newTabSpec("Schedules");
         TabHost.TabSpec tab4 = tabHost.newTabSpec("Diet");
         TabHost.TabSpec tab2 = tabHost.newTabSpec("Trend");
+        TabHost.TabSpec tab5 = tabHost.newTabSpec("Foods");
 
        // Set the Tab name and Activity
        // that will be opened when particular Tab will be selected
@@ -80,14 +81,17 @@ public class HomeScreen extends TabActivity implements OnClickListener {
         tab3.setContent(new Intent(this,Schedules.class));
        
         tab4.setIndicator("Diet");
-        tab4.setContent(new Intent(this,DietarySuggestions.class));
+        tab4.setContent(new Intent(this,BodyRequirements.class));
+        
+        tab5.setIndicator("Foods");
+        tab5.setContent(new Intent(this,AvailableFoods.class));
        
         /** Add the tabs  to the TabHost to display. */
         tabHost.addTab(tab1);
         tabHost.addTab(tab2);
         tabHost.addTab(tab3);
         tabHost.addTab(tab4);
-        
+        tabHost.addTab(tab5);
           
         slideButton = (Button) findViewById(R.id.handle);
 		  slidingDrawer = (SlidingDrawer) findViewById(R.id.SlidingDrawer);

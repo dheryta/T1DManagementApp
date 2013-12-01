@@ -78,10 +78,32 @@
     <string name="etCommentsText">T1DM can help you even better with your valuable feedback.</string>
     <string name="btnSearch">Search</string>
     <string name="title_activity_dietary_suggestions">DietarySuggestions</string>
+    <string name="title_activity_body_requirements">Body Requirements</string>
     <string name="txtEnableAutoReporting">Enable Auto Reporting</string>
     <string name="cbEnableAudio">Personalized Alarm</string>
     <string name="title_activity_generate_report">Generate Report</string>
-	<string name="tvToDate"> To YYYY-MM-DD</string>
-	<string name="tvFromDate"> From YYYY-MM-DD</string>
-	
+    <string name="tvToDate"> To YYYY-MM-DD</string>
+    <string name="tvFromDate"> From YYYY-MM-DD</string>
+    
+
+    <string-array name="activity_level_array">
+        <item>Sedentary</item>
+        <item>Lightly Active</item>
+        <item>Moderately Active</item>
+        <item>Very Active</item>
+        <item>Extra Active</item>
+    </string-array>
+    <string-array name="gender_array">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+
+    <string name="title_activity_available_foods">Available Foods</string>
+    <string name="title_activity_meal_sub_type">Meal Sub Type</string>
+	<string name="rbBreakfast">Breakfast</string>
+    <string name="rbBrunch">Brunch</string>
+    <string name="rbLunch">Lunch</string>
+    <string name="rbSnacks">Snacks</string>
+    <string name="rbDinner">Dinner</string>
+    <string name="action_addFood">Add to meal</string>
 </resources>

@@ -70,7 +70,6 @@ public final class R {
         public static final int editTextInsulin=0x7f0a0004;
         public static final int editTextMeal=0x7f0a0006;
         public static final int editTextMisc=0x7f0a0008;
-        public static final int etAge=0x7f0a0012;
         public static final int etBMI=0x7f0a001b;
         public static final int etCalories=0x7f0a001c;
         public static final int etCarbs=0x7f0a001d;
@@ -80,6 +79,7 @@ public final class R {
         public static final int etInches=0x7f0a000d;
         public static final int etInsulin=0x7f0a001e;
         public static final int etToDate=0x7f0a0020;
+        public static final int etWeight=0x7f0a0012;
         public static final int handle=0x7f0a0025;
         public static final int imageView1=0x7f0a003c;
         public static final int listviewActivities_Menu=0x7f0a003e;
@@ -122,7 +122,6 @@ public final class R {
         public static final int textView2=0x7f0a002b;
         public static final int timePickerRepeat=0x7f0a0048;
         public static final int tvActivityLevel=0x7f0a0016;
-        public static final int tvAge=0x7f0a0010;
         public static final int tvBMI=0x7f0a0017;
         public static final int tvCalories=0x7f0a0018;
         public static final int tvCarbs=0x7f0a001a;
@@ -133,7 +132,8 @@ public final class R {
         public static final int tvHeight=0x7f0a000b;
         public static final int tvInches=0x7f0a000f;
         public static final int tvInsulin=0x7f0a0019;
-        public static final int tvYears=0x7f0a0013;
+        public static final int tvKgs=0x7f0a0013;
+        public static final int tvWeight=0x7f0a0010;
         public static final int txtAddress=0x7f0a004f;
         public static final int txtAge=0x7f0a0052;
         public static final int txtDrName=0x7f0a004e;

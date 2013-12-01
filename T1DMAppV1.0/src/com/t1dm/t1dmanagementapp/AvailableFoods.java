@@ -90,10 +90,12 @@ public class AvailableFoods extends ListActivity {
 				if(value.isSelected())
 						sel=sel+","+value.get_FoodName();
 			}
-			
+			if (!sel.equals("")){
 			Intent intent=new Intent(this, MealSubType.class);
 			intent.putExtra("Foods", sel);			
 			startActivity(intent);
+			}else
+				Toast.makeText(AvailableFoods.this, "T1DM says, select some foods", Toast.LENGTH_SHORT).show();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);

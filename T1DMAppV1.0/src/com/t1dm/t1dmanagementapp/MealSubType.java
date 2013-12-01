@@ -20,12 +20,18 @@ public class MealSubType extends Activity {
 	private RadioGroup rgMealSubtype ;
 	private RadioButton rbSelected ;
 	
+	private CommonMethods commonMethods = new CommonMethods();
+	private T1DMApplication appContext;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_meal_sub_type);
 		
+		appContext = ((T1DMApplication) getApplicationContext());
+		appContext.setContext(getApplicationContext());
+		appContext.setDbHandler(new DatabaseHandler());
 		
 		rgMealSubtype = (RadioGroup)findViewById(R.id.rgMealSubtype);
 		
@@ -41,7 +47,12 @@ public class MealSubType extends Activity {
 				int selectedId = rgMealSubtype.getCheckedRadioButtonId();
 				rbSelected = (RadioButton) findViewById(selectedId);
 				String subtype = rbSelected.getText().toString();
-				Toast.makeText(MealSubType.this, foods+" Will be updated in table for "+subtype, Toast.LENGTH_LONG).show();
+				if (!foods.equals("")){					
+				if (appContext.getDbHandler().updateMeal(subtype, foods) != -1)
+					Toast.makeText(MealSubType.this, "T1DM says, meal plan updated for "+subtype, Toast.LENGTH_LONG).show();
+				else
+					Toast.makeText(MealSubType.this, "T1DM says, oops could not update meal plan for "+subtype, Toast.LENGTH_LONG).show();
+				}
 				finish();
 			}
 		});

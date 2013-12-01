@@ -81,7 +81,9 @@ public class DatabaseHandler {
 
 			+ "(UID INTEGER PRIMARY KEY, NAME TEXT, AGE INTEGER, EMAIL TEXT, DrNAME TEXT, "
 
-			+ "DrPHONE TEXT, ADDRESS TEXT, EMERGENCY TEXT, DUMMY INTEGER, USEAUDIO BOOLEAN, EMERGENCY_ENABLED BOOLEAN)";
+			+ "DrPHONE TEXT, ADDRESS TEXT, EMERGENCY TEXT, DUMMY INTEGER, USEAUDIO BOOLEAN, EMERGENCY_ENABLED BOOLEAN"
+			+ "BMI_BMR TEXT, CALORIES TEXT, INSULIN TEXT, CARBS TEXT"
+			+ "HEIGHT_FT TEXT, HEIGHT_IN TEXT, WEIGHT TEXT, GENDER TEXT, ACTIVITY_LEVEL TEXT)";
 	
 	private static final String CREATE_TBL_FOODS = "CREATE TABLE  IF NOT EXISTS "
 
@@ -402,6 +404,531 @@ public class DatabaseHandler {
 
 	}
 
+	
+	public String updateAndGetBMIBMR(String BMI_BMR) {
+
+		if (!BMI_BMR.equals("")){
+			SQLiteDatabase db = this.getWritableDatabase();
+
+			String retVal = null;
+
+			if (db != null) {
+
+				ContentValues values = new ContentValues();
+
+						
+				values.put("BMI_BMR", BMI_BMR);
+
+				try {
+
+					db.update(TBL_USER, values, " uid=" + this.uid, null);
+					retVal = BMI_BMR;
+
+				} catch (Exception e) {
+
+					retVal = null;
+
+					return retVal;
+
+				} finally {
+
+					db.close();
+
+				}
+			}
+			return retVal;
+			}else{
+			String selectQuery = "SELECT  BMI_BMR FROM " + TBL_USER;
+			Cursor cursor = null;
+			String retVal = null;
+			SQLiteDatabase db = this.getReadableDatabase();
+			try {
+				if (db != null) {
+
+					cursor = db.rawQuery(selectQuery, null);
+
+					// looping through all rows and adding to list
+					if (cursor.moveToFirst()) {
+						retVal = cursor.getString(cursor.getColumnIndex("BMI_BMR"));
+					}
+				}
+			} catch (Exception ex) {
+				retVal = null;
+				return retVal;
+			} finally {
+
+				if (cursor != null)
+
+					cursor.close();
+
+				db.close();
+
+			}
+
+			return retVal;
+			
+			}
+
+	}
+	
+	public String updateAndGetInsulin(String insulin) {
+
+		if (!insulin.equals("")){
+			SQLiteDatabase db = this.getWritableDatabase();
+
+			String retVal = null;
+
+			if (db != null) {
+
+				ContentValues values = new ContentValues();
+
+						
+				values.put("INSULIN", insulin);
+
+				try {
+
+					db.update(TBL_USER, values, " uid=" + this.uid, null);
+					retVal = insulin;
+
+				} catch (Exception e) {
+
+					retVal = null;
+
+					return retVal;
+
+				} finally {
+
+					db.close();
+
+				}
+			}
+			return retVal;
+			}else{
+			String selectQuery = "SELECT  INSULIN FROM " + TBL_USER;
+			Cursor cursor = null;
+			String retVal = null;
+			SQLiteDatabase db = this.getReadableDatabase();
+			try {
+				if (db != null) {
+
+					cursor = db.rawQuery(selectQuery, null);
+
+					// looping through all rows and adding to list
+					if (cursor.moveToFirst()) {
+						retVal = cursor.getString(cursor.getColumnIndex("INSULIN"));
+					}
+				}
+			} catch (Exception ex) {
+				retVal = null;
+				return retVal;
+			} finally {
+
+				if (cursor != null)
+
+					cursor.close();
+
+				db.close();
+
+			}
+
+			return retVal;
+			
+			}
+
+
+	}
+	
+	public String updateAndGetCarbs(String carbs) {
+
+		if (!carbs.equals("")){
+			SQLiteDatabase db = this.getWritableDatabase();
+
+			String retVal = null;
+
+			if (db != null) {
+
+				ContentValues values = new ContentValues();
+
+						
+				values.put("CARBS", carbs);
+
+				try {
+
+					db.update(TBL_USER, values, " uid=" + this.uid, null);
+					retVal = carbs;
+
+				} catch (Exception e) {
+
+					retVal = null;
+
+					return retVal;
+
+				} finally {
+
+					db.close();
+
+				}
+			}
+			return retVal;
+			}else{
+			String selectQuery = "SELECT  CARBS FROM " + TBL_USER;
+			Cursor cursor = null;
+			String retVal = null;
+			SQLiteDatabase db = this.getReadableDatabase();
+			try {
+				if (db != null) {
+
+					cursor = db.rawQuery(selectQuery, null);
+
+					// looping through all rows and adding to list
+					if (cursor.moveToFirst()) {
+						retVal = cursor.getString(cursor.getColumnIndex("CARBS"));
+					}
+				}
+			} catch (Exception ex) {
+				retVal = null;
+				return retVal;
+			} finally {
+
+				if (cursor != null)
+
+					cursor.close();
+
+				db.close();
+
+			}
+
+			return retVal;
+			
+			}
+
+	}
+	
+	public String updateAndGetCalories(String calories) {
+
+		if (!calories.equals("")){
+		SQLiteDatabase db = this.getWritableDatabase();
+
+		String retVal = null;
+
+		if (db != null) {
+
+			ContentValues values = new ContentValues();
+
+					
+			values.put("CALORIES", calories);
+
+			try {
+
+				db.update(TBL_USER, values, " uid=" + this.uid, null);
+				retVal = calories;
+
+			} catch (Exception e) {
+
+				retVal = null;
+
+				return retVal;
+
+			} finally {
+
+				db.close();
+
+			}
+		}
+		return retVal;
+		}else{
+		String selectQuery = "SELECT  CALORIES FROM " + TBL_USER;
+		Cursor cursor = null;
+		String retVal = null;
+		SQLiteDatabase db = this.getReadableDatabase();
+		try {
+			if (db != null) {
+
+				cursor = db.rawQuery(selectQuery, null);
+
+				// looping through all rows and adding to list
+				if (cursor.moveToFirst()) {
+					retVal = cursor.getString(cursor.getColumnIndex("CALORIES"));
+				}
+			}
+		} catch (Exception ex) {
+			retVal = null;
+			return retVal;
+		} finally {
+
+			if (cursor != null)
+
+				cursor.close();
+
+			db.close();
+
+		}
+
+		return retVal;
+		
+		}
+	}
+
+	public String updateAndGetHeight(String HEIGHT_FT, String HEIGHT_IN) {
+
+		if (!HEIGHT_FT.equals("") && !HEIGHT_IN.equals("")){
+			SQLiteDatabase db = this.getWritableDatabase();
+
+			String retVal = null;
+
+			if (db != null) {
+
+				ContentValues values = new ContentValues();
+
+						
+				values.put("HEIGHT_FT", HEIGHT_FT);
+				values.put("HEIGHT_IN", HEIGHT_IN);
+
+				try {
+
+					db.update(TBL_USER, values, " uid=" + this.uid, null);
+					retVal = HEIGHT_FT+"."+HEIGHT_IN;
+
+				} catch (Exception e) {
+
+					retVal = null;
+
+					return retVal;
+
+				} finally {
+
+					db.close();
+
+				}
+			}
+			return retVal;
+			}else{
+			String selectQuery = "SELECT  HEIGHT_FT,HEIGHT_IN FROM " + TBL_USER;
+			Cursor cursor = null;
+			String retVal = null;
+			SQLiteDatabase db = this.getReadableDatabase();
+			try {
+				if (db != null) {
+
+					cursor = db.rawQuery(selectQuery, null);
+
+					// looping through all rows and adding to list
+					if (cursor.moveToFirst()) {
+						String ft = cursor.getString(cursor.getColumnIndex("HEIGHT_FT"));
+						String in = cursor.getString(cursor.getColumnIndex("HEIGHT_IN"));
+						retVal = ft+":"+in;								
+					}
+				}
+			} catch (Exception ex) {
+				retVal = null;
+				return retVal;
+			} finally {
+
+				if (cursor != null)
+
+					cursor.close();
+
+				db.close();
+
+			}
+
+			return retVal;
+			
+			}
+
+	}
+	
+	public String updateAndGetWeight(String WEIGHT) {
+
+		if (!WEIGHT.equals("")){
+		SQLiteDatabase db = this.getWritableDatabase();
+
+		String retVal = null;
+
+		if (db != null) {
+
+			ContentValues values = new ContentValues();
+			try {
+					
+			values.put("WEIGHT", WEIGHT);
+				db.update(TBL_USER, values, " uid=" + this.uid, null);
+				retVal = WEIGHT;
+
+			} catch (Exception e) {
+
+				retVal = null;
+
+				return retVal;
+
+			} finally {
+
+				db.close();
+
+			}
+		}
+		return retVal;
+		}else{
+		String selectQuery = "SELECT  WEIGHT FROM " + TBL_USER;
+		Cursor cursor = null;
+		String retVal = null;
+		SQLiteDatabase db = this.getReadableDatabase();
+		try {
+			if (db != null) {
+
+				cursor = db.rawQuery(selectQuery, null);
+
+				// looping through all rows and adding to list
+				if (cursor.moveToFirst()) {
+					retVal = Integer.toString(cursor.getInt(cursor.getColumnIndex("WEIGHT")));
+				}
+			}
+		} catch (Exception ex) {
+			retVal = null;
+			return retVal;
+		} finally {
+
+			if (cursor != null)
+
+				cursor.close();
+
+			db.close();
+
+		}
+
+		return retVal;
+		
+		}
+	}
+	
+	public String updateAndGetGender(String GENDER) {
+
+		if (!GENDER.equals("")){
+		SQLiteDatabase db = this.getWritableDatabase();
+
+		String retVal = null;
+
+		if (db != null) {
+
+			ContentValues values = new ContentValues();
+
+					
+			values.put("GENDER", GENDER);
+
+			try {
+
+				db.update(TBL_USER, values, " uid=" + this.uid, null);
+				retVal = GENDER;
+
+			} catch (Exception e) {
+
+				retVal = null;
+
+				return retVal;
+
+			} finally {
+
+				db.close();
+
+			}
+		}
+		return retVal;
+		}else{
+		String selectQuery = "SELECT  GENDER FROM " + TBL_USER;
+		Cursor cursor = null;
+		String retVal = null;
+		SQLiteDatabase db = this.getReadableDatabase();
+		try {
+			if (db != null) {
+
+				cursor = db.rawQuery(selectQuery, null);
+
+				// looping through all rows and adding to list
+				if (cursor.moveToFirst()) {
+					retVal = cursor.getString(cursor.getColumnIndex("GENDER"));
+				}
+			}
+		} catch (Exception ex) {
+			retVal = null;
+			return retVal;
+		} finally {
+
+			if (cursor != null)
+
+				cursor.close();
+
+			db.close();
+
+		}
+
+		return retVal;
+		
+		}
+	}
+
+	public String updateAndGetActivityLevel(String ACTIVITY_LEVEL) {
+
+		if (!ACTIVITY_LEVEL.equals("")){
+		SQLiteDatabase db = this.getWritableDatabase();
+
+		String retVal = null;
+
+		if (db != null) {
+
+			ContentValues values = new ContentValues();
+
+					
+			values.put("ACTIVITY_LEVEL", ACTIVITY_LEVEL);
+
+			try {
+
+				db.update(TBL_USER, values, " uid=" + this.uid, null);
+				retVal = ACTIVITY_LEVEL;
+
+			} catch (Exception e) {
+
+				retVal = null;
+
+				return retVal;
+
+			} finally {
+
+				db.close();
+
+			}
+		}
+		return retVal;
+		}else{
+		String selectQuery = "SELECT  ACTIVITY_LEVEL FROM " + TBL_USER;
+		Cursor cursor = null;
+		String retVal = null;
+		SQLiteDatabase db = this.getReadableDatabase();
+		try {
+			if (db != null) {
+
+				cursor = db.rawQuery(selectQuery, null);
+
+				// looping through all rows and adding to list
+				if (cursor.moveToFirst()) {
+					retVal = cursor.getString(cursor.getColumnIndex("ACTIVITY_LEVEL"));
+				}
+			}
+		} catch (Exception ex) {
+			retVal = null;
+			return retVal;
+		} finally {
+
+			if (cursor != null)
+
+				cursor.close();
+
+			db.close();
+
+		}
+
+		return retVal;
+		
+		}
+	}
 	public boolean isEmergencyEnabled() {
 		boolean EMERGENCY_ENABLED = false;
 
@@ -819,6 +1346,46 @@ public class DatabaseHandler {
 		return pid;
 
 	}
+
+	// Returns 1 on success else 0
+		public long updateMeal(String type, String details) {
+
+			SQLiteDatabase db = this.getWritableDatabase();
+
+			ContentValues values = new ContentValues();
+
+			long pid = -1;
+
+			if (db != null) {
+
+				try {
+
+					values = new ContentValues();
+
+					values.put("FOOD_DETAILS", details);
+
+					pid = db.update(TBL_ACTIVITY_MEAL, values, " ACTIVITY_SUBTYPE=\""
+							+ type+"\"", null);
+
+				}
+
+				catch (Exception e) {
+
+					pid = -1;
+
+					return pid;
+
+				} finally {
+
+					db.close();
+
+				}
+
+			}
+
+			return pid;
+
+		}
 
 	public boolean getUserProfiling()
 

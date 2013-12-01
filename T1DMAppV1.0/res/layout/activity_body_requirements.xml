@@ -25,7 +25,7 @@
      
     <EditText
         android:id="@+id/etFeet"
-        android:layout_width="35dp"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/tvHeight"
         android:layout_alignParentTop="true"
@@ -39,7 +39,7 @@
 
      <EditText
          android:id="@+id/etInches"
-         android:layout_width="35dp"
+         android:layout_width="50dp"
          android:layout_height="wrap_content"
          
          android:layout_marginLeft="15dp"
@@ -71,24 +71,24 @@
          android:layout_toRightOf="@+id/etInches"
          android:layout_marginLeft="10dp"
          android:minWidth="5dp"
-         android:text="Inches" />
+         android:text="Inch" />
 
     
      <TextView
-         android:id="@+id/tvAge"
+         android:id="@+id/tvWeight"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
          android:layout_alignLeft="@+id/tvGender"
          android:layout_below="@+id/etFeet"
          android:layout_marginTop="18dp"
-         android:text="Age" />
+         android:text="Weight" />
 
      <EditText
-         android:id="@+id/etAge"
-         android:layout_width="35dp"
+         android:id="@+id/etWeight"
+         android:layout_width="50dp"
          android:layout_height="wrap_content"
-         android:layout_alignBaseline="@+id/tvAge"
-         android:layout_alignBottom="@+id/tvAge"
+         android:layout_alignBaseline="@+id/tvWeight"
+         android:layout_alignBottom="@+id/tvWeight"
          android:layout_toLeftOf="@+id/tvFeet"
          android:ems="10"
          android:inputType="number"
@@ -96,23 +96,23 @@
          android:minWidth="5dp" />
      
       <TextView
-         android:id="@+id/tvYears"
+         android:id="@+id/tvKgs"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
          android:layout_marginLeft="10dp"
          android:layout_below="@+id/etInches"
-         android:layout_toRightOf="@+id/etAge"
-         android:layout_alignBaseline="@+id/tvAge"
+         android:layout_toRightOf="@+id/etWeight"
+         android:layout_alignBaseline="@+id/tvWeight"
          android:layout_marginTop="70dp"
          android:minWidth="5dp"
-         android:text="Years" />
+         android:text="Kgs" />
      
 
      <TextView
          android:id="@+id/tvGender"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"         
-         android:layout_below="@+id/tvAge"
+         android:layout_below="@+id/tvWeight"
          android:layout_marginTop="30dp"
          android:minWidth="5dp"
          android:text="Gender" />
@@ -135,7 +135,7 @@
          android:layout_toRightOf="@+id/tvGender"
          android:layout_alignTop="@+id/tvGender"
          android:layout_marginLeft="40dp"
-         android:layout_below="@+id/etAge"
+         android:layout_below="@+id/etWeight"
          android:entries="@array/gender_array" />
 
      <TextView
@@ -155,7 +155,7 @@
          android:layout_alignParentLeft="true"
          android:layout_below="@+id/tvActivityLevel"
          android:layout_marginTop="50dp"
-         android:text="BMI" />
+         android:text="BMI/BMR" />
      
      <TextView
          android:id="@+id/tvCalories"

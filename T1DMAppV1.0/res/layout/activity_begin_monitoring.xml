@@ -124,10 +124,8 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/checkBoxMisc"
         android:layout_alignLeft="@+id/editTextInsulin"
-        android:layout_alignRight="@+id/editTextMeal"
-        android:layout_below="@+id/checkBoxMeal"
+        android:layout_alignTop="@+id/checkBoxMeal"
         android:background="@drawable/camera" />
 
 </RelativeLayout>

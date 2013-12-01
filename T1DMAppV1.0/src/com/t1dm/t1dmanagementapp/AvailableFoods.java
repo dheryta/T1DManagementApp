@@ -5,6 +5,9 @@ import java.util.Calendar;
 import java.util.List;
 
 
+
+
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.ListActivity;
@@ -67,7 +70,34 @@ public class AvailableFoods extends ListActivity {
 		});
 	}
 	
-	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.available_foods, menu);
+
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.action_addFood:
+			foodListView = (ListView)findViewById(android.R.id.list);
+			
+			String sel="";
+			for (int i=0; i<foodListView.getAdapter().getCount();i++){
+				FoodModel value = (FoodModel) foodListView.getAdapter().getItem(i);
+				if(value.isSelected())
+						sel=sel+","+value.get_FoodName();
+			}
+			
+			Intent intent=new Intent(this, MealSubType.class);
+			intent.putExtra("Foods", sel);			
+			startActivity(intent);
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
 	
 
 	private List<FoodModel> getModel(String search) {

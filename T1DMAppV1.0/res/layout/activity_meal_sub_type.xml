@@ -3,13 +3,14 @@
         android:layout_height="fill_parent"
         >
         
-<RelativeLayout android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+<RelativeLayout
+    android:layout_width="fill_parent"
+    android:layout_height="312dp"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    >
+    android:paddingTop="@dimen/activity_vertical_margin" >
+
     <RadioGroup
         android:id="@+id/rgMealSubtype"
         android:layout_width="wrap_content"
@@ -57,6 +58,15 @@
         
         
     </RadioGroup>
+
+    <Button
+        android:id="@+id/btnAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/rgMealSubtype"
+        android:layout_below="@+id/rgMealSubtype"
+        android:layout_marginLeft="14dp"
+        android:text="Add" />
 
 </RelativeLayout>
 </ScrollView>

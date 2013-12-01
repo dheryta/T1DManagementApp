@@ -76,6 +76,7 @@ public class AvailableFoodsAdapter extends ArrayAdapter<FoodModel> {
 		}
 		
 		ViewHolder holder = (ViewHolder) view.getTag();
+		holder.checkbox.setChecked(values.get(position).isSelected());
 		holder.foodName.setText(values.get(position).get_FoodName());
 		holder.foodDetail.setText(values.get(position).get_Quantity()+","+values.get(position).get_Carbs()
 				+","+values.get(position).get_Calories()+","+values.get(position).get_GI()

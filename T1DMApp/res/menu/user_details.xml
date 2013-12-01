@@ -1,3 +1,0 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android" >
-    <item android:id="@+id/userDetails_Save" android:title="@string/menu_save_user_details"></item>
-</menu>

@@ -88,11 +88,12 @@ public class AvailableFoods extends ListActivity {
 			for (int i=0; i<foodListView.getAdapter().getCount();i++){
 				FoodModel value = (FoodModel) foodListView.getAdapter().getItem(i);
 				if(value.isSelected())
-						sel=sel+","+value.get_FoodName();
+						sel=value.get_FoodName()+", "+sel;
 			}
 			if (!sel.equals("")){
+			String s=	sel.replace(sel.charAt(sel.lastIndexOf(',')), '.');
 			Intent intent=new Intent(this, MealSubType.class);
-			intent.putExtra("Foods", sel);			
+			intent.putExtra("Foods", s);			
 			startActivity(intent);
 			}else
 				Toast.makeText(AvailableFoods.this, "T1DM says, select some foods", Toast.LENGTH_SHORT).show();

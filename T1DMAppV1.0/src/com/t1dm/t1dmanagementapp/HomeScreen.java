@@ -115,7 +115,8 @@ public class HomeScreen extends TabActivity implements OnClickListener {
 	/*"Use Audio Message", 
 	 * "Emergency Mode", 
 	 * "Insulin Dosage", 
-	 * "Show Trend", 
+	 * "My Profile", 
+	 * "Meal Plan",
 	 * "Report", 
 	 * "Feedback"
 	 * */
@@ -134,10 +135,12 @@ public class HomeScreen extends TabActivity implements OnClickListener {
 			        	startActivity(new Intent(appContext.getContext(),	UserDetailsActivity.class));
 			        	break;
 			        case 4:
-			        	startActivity(new Intent(appContext.getContext(),	GenerateReport.class));
-			        	break;
-			
+			        	startActivity(new Intent(appContext.getContext(),	ShowMealPlan.class));
+			        	break;			        
 			        case 5:
+			        	startActivity(new Intent(appContext.getContext(),	GenerateReport.class));
+			        	break;			
+			        case 6:
 			        	startActivity(new Intent(appContext.getContext(),	SendFeedback.class));
 			        	break;
 			        

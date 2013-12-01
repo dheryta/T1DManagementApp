@@ -252,6 +252,7 @@
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </receiver>
@@ -266,8 +267,13 @@
         </activity>
         <activity
             android:name="com.t1dm.t1dmanagementapp.MealSubType"
-            android:label="@string/title_activity_meal_sub_type" 
-            android:theme="@android:style/Theme.Dialog">
+            android:label="@string/title_activity_meal_sub_type"
+            android:theme="@android:style/Theme.Dialog" >
+        </activity>
+        <activity
+            android:name="com.t1dm.t1dmanagementapp.ShowMealPlan"
+            android:label="@string/title_activity_show_meal_plan"
+            android:theme="@android:style/Theme.Dialog" >
         </activity>
     </application>
 

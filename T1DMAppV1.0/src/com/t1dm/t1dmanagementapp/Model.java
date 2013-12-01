@@ -12,7 +12,16 @@ public class Model {
 		private String time;
 		private int hour;
 		private int minute;
+		private String meal;
 		
+		public String getMeal() {
+			return meal;
+		}
+
+		public void setMeal(String meal) {
+			this.meal = meal;
+		}
+
 		public Model(){
 			
 		}

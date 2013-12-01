@@ -59,7 +59,7 @@ public class CommonMethods {
 
 	public final List<String> REPEAT = Arrays.asList("Daily", "Weekly", "Fortnightly", "Monthly");
 	
-	public final List<String> SETTINGS = Arrays.asList("Use Audio Message", "Emergency Mode", "Insulin Dosage", "My Profile", "Generate Report", "Feedback");
+	public final List<String> SETTINGS = Arrays.asList("Use Audio Message", "Emergency Mode", "Insulin Dosage", "My Profile", "My Meal Plan", "Generate Report", "Feedback");
 	
 	
 	public final String SUBTYPE_BREAKFAST = "BreakFast";

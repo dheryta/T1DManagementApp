@@ -84,7 +84,6 @@
     <string name="title_activity_generate_report">Generate Report</string>
     <string name="tvToDate"> To YYYY-MM-DD</string>
     <string name="tvFromDate"> From YYYY-MM-DD</string>
-    
 
     <string-array name="activity_level_array">
         <item>Sedentary</item>
@@ -100,10 +99,12 @@
 
     <string name="title_activity_available_foods">Available Foods</string>
     <string name="title_activity_meal_sub_type">Meal Sub Type</string>
-	<string name="rbBreakfast">Breakfast</string>
+    <string name="rbBreakfast">BreakFast</string>
     <string name="rbBrunch">Brunch</string>
     <string name="rbLunch">Lunch</string>
     <string name="rbSnacks">Snacks</string>
     <string name="rbDinner">Dinner</string>
     <string name="action_addFood">Add to meal</string>
+    <string name="title_activity_show_meal_plan">My Meal Plan</string>
+
 </resources>

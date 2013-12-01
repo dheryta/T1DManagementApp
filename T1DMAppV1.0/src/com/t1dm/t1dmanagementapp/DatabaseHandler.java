@@ -2069,6 +2069,61 @@ public class DatabaseHandler {
 		return alarms;
 	}
 
+
+	public ArrayList<FoodModel> getMealPlan() {
+		ArrayList<FoodModel> model = new ArrayList<FoodModel>();
+
+		FoodModel meal = null;
+
+		SQLiteDatabase db = this.getReadableDatabase();
+
+		String tableToRead = TBL_ACTIVITY_MEAL;
+		Cursor cursor = null;
+		if (db != null) {
+
+			try {
+
+				String query = "SELECT * FROM " + tableToRead;
+
+				cursor = db.rawQuery(query, null);
+
+				if (cursor.moveToFirst()) {
+
+					while (!cursor.isAfterLast()) {
+						meal = new FoodModel();
+
+						String activity = cursor.getString(cursor.getColumnIndex("ACTIVITY_SUBTYPE"));
+						String foodDetails = cursor.getString(cursor.getColumnIndex("FOOD_DETAILS"));
+						if (foodDetails!=null && activity!=null && !activity.equals("Dummy") && !foodDetails.equals("") ) {
+							meal.set_FoodType(activity);
+							meal.set_FoodName(foodDetails);
+							model.add(meal);
+						}
+						cursor.moveToNext();
+					}
+
+				}
+
+			} catch (Exception e) {
+
+				return model;
+
+			} finally {
+
+				if (cursor != null)
+
+					cursor.close();
+
+				db.close();
+
+			}
+
+		}
+		return model;
+	}
+
+
+	
 	public SQLiteDatabase getReadableDatabase() {
 
 		SQLiteDatabase db = null;

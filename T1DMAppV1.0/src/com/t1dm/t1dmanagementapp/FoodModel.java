@@ -1,6 +1,7 @@
 package com.t1dm.t1dmanagementapp;
 
 public class FoodModel {
+	private String _FoodType;
 	private String _FoodName;
 	private String _Quantity;
 	private int _Carbs;
@@ -9,6 +10,14 @@ public class FoodModel {
 	private int _Calories;
 	private boolean selected;
 	
+	public String get_FoodType() {
+		return _FoodType;
+	}
+
+	public void set_FoodType(String _FoodType) {
+		this._FoodType = _FoodType;
+	}
+
 	public boolean isSelected() {
 		return selected;
 	}

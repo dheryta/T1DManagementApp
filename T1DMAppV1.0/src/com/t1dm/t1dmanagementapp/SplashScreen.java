@@ -6,6 +6,7 @@ import java.io.File;
 
 
 
+
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
@@ -17,11 +18,15 @@ import android.app.PendingIntent;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 
 public class SplashScreen extends Activity {
 
 	private CommonMethods commonMethods = new CommonMethods();
 	private T1DMApplication appContext;
+	final String PREFS_NAME = "T1DM_Prefs";
+
+	private SharedPreferences sharedPrefs;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +35,12 @@ public class SplashScreen extends Activity {
 		appContext = ((T1DMApplication) getApplicationContext());
 		appContext.setContext(getApplicationContext());
 		appContext.setDbHandler(new DatabaseHandler());
+		
+		sharedPrefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+
+		if (sharedPrefs.getBoolean("t1dm_first_time", true)) {
+			sharedPrefs.edit().putBoolean("t1dm_first_time", false).commit(); 
+		
 		
 		AlertDialog.Builder builder = new Builder(SplashScreen.this);
 		builder.setTitle("T1DM - Important");
@@ -43,8 +54,9 @@ public class SplashScreen extends Activity {
 			 
             @Override
             public void onClick(DialogInterface arg0, int arg1) {
-            	
+            	sharedPrefs.edit().putBoolean("t1dm_user_ok", true).commit();
             	new AsyncDatabaseOperations().execute();
+            	
                
             }
         });
@@ -52,13 +64,15 @@ public class SplashScreen extends Activity {
 
             @Override
             public void onClick(DialogInterface arg0, int arg1) {            	
-            	
+            	sharedPrefs.edit().putBoolean("t1dm_user_ok", false).commit();
             	finish();
             }
         });
         builder.show();
         
-		
+		}else if (sharedPrefs.getBoolean("t1dm_user_ok", true)){
+			new AsyncDatabaseOperations().execute();
+		}
 	}
 
 	@Override
@@ -178,4 +192,5 @@ public class SplashScreen extends Activity {
 
 	}
 
+	
 }

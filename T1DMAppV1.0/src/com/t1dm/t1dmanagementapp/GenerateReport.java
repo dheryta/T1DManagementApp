@@ -36,12 +36,21 @@ public class GenerateReport extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_generate_report);
 		calendar = Calendar.getInstance();
+		int y, m, d;
+		y = calendar.get(Calendar.YEAR);
+		m = calendar.get(Calendar.MONTH)+1;
+		d = calendar.get(Calendar.DAY_OF_MONTH);
+		
+		String month = (m < 10)?("0"+ Integer.toString(m)):Integer.toString(m);
+		String day = (d < 10)?("0"+ Integer.toString(d)):Integer.toString(d);
+		String year = Integer.toString(y);
+		
 		fromDate = (EditText)findViewById(R.id.etFromDate);
 		fromDate.setInputType(InputType.TYPE_NULL); 
-		fromDate.setText(calendar.get(Calendar.YEAR)+"-"+(calendar.get(Calendar.MONTH)+1)+"-"+calendar.get(Calendar.DAY_OF_MONTH));	
+		fromDate.setText(year+"-"+month+"-"+day);	
 		toDate = (EditText)findViewById(R.id.etToDate);
 		toDate.setInputType(InputType.TYPE_NULL); 
-		toDate.setText(calendar.get(Calendar.YEAR)+"-"+(calendar.get(Calendar.MONTH)+1)+"-"+calendar.get(Calendar.DAY_OF_MONTH));
+		toDate.setText(year+"-"+month+"-"+day);
 		
 		fromDate.setOnClickListener(new OnClickListener() {
 			

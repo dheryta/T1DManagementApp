@@ -275,7 +275,7 @@ public class BodyRequirements extends Activity {
 		try{
 		String height = appContext.getDbHandler().updateAndGetHeight("", "");
 		String[] feet_inch = height.split(":");
-		if (feet_inch.length == 2){
+		if (feet_inch.length == 2 && feet_inch[0]!=null && feet_inch[1]!=null){
 		etFeet.setText(feet_inch[0]);
 		etInch.setText(feet_inch[1]);
 		}

@@ -7,13 +7,15 @@ import java.io.File;
 
 
 import android.os.AsyncTask;
-
 import android.os.Bundle;
-
+import android.support.v4.app.NotificationCompat;
 import android.widget.Toast;
-
 import android.app.Activity;
-
+import android.app.AlertDialog;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.AlertDialog.Builder;
+import android.content.DialogInterface;
 import android.content.Intent;
 
 public class SplashScreen extends Activity {
@@ -28,7 +30,35 @@ public class SplashScreen extends Activity {
 		appContext = ((T1DMApplication) getApplicationContext());
 		appContext.setContext(getApplicationContext());
 		appContext.setDbHandler(new DatabaseHandler());
-		new AsyncDatabaseOperations().execute();
+		
+		AlertDialog.Builder builder = new Builder(SplashScreen.this);
+		builder.setTitle("T1DM - Important");
+		builder.setMessage("This app gives dietary suggestions based on GI and GL values mainly for Type 1 diabetics."
+				+ "It also helps to manage daily blood sugar levels."
+				+ "Food database is taken from Atkinson FS, Foster-Powell K, Brand-Miller JC. International Tables of Glycemic Index and Glycemic Load Values: 2008. "
+				+ "DiabCare 2008; 31(12). All suggestions are approximations and may differ from patient to patient.  "
+				+ "You are advised to consult your doctor before selecting any food in your diet."
+				+ "Under no circumstances developer(s) shall be held responsible for any mishappenings.");
+		builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+			 
+            @Override
+            public void onClick(DialogInterface arg0, int arg1) {
+            	
+            	new AsyncDatabaseOperations().execute();
+               
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface arg0, int arg1) {            	
+            	
+            	finish();
+            }
+        });
+        builder.show();
+        
+		
 	}
 
 	@Override
@@ -38,16 +68,34 @@ public class SplashScreen extends Activity {
 
 	private class AsyncDatabaseOperations extends AsyncTask<Void, Void, Void>{
 		private Class<?> nextClass;
+		private NotificationCompat.Builder notificationBuilder;
+		private NotificationManager notificationManager;
+		
 		@Override
 	      protected void onPreExecute(){
 			super.onPreExecute();
+			
+		     PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, new Intent(), 0);
+
+		     notificationBuilder =
+		    	        new NotificationCompat.Builder(getApplicationContext())
+		    	        .setSmallIcon(R.drawable.ic_launcher)
+		    	        .setContentTitle("T1DM Installation")
+		    	        .setContentText("Loading database")
+		    	        .setAutoCancel(false);
+		     notificationBuilder.setContentIntent(pendingIntent);
+		     
+		    notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+		   
+		    notificationManager.notify(100, notificationBuilder.build());
+
 	      }
 
 	      @Override
 	      protected Void doInBackground(Void... voids){
 	    	  try {
 	  				File dbPath = new File(commonMethods.APP_PATH + File.separator + commonMethods.DB_FOLDER);
-	  				boolean charts = true, recordings = true, captures = true, databases = true, reports = true;
+	  				boolean charts = true, recordings = true, captures = true, databases = true, reports = true, foods = true;
 	  				if (!dbPath.isDirectory())
 	  					databases = commonMethods.createDatabaseFolder();
 	  				
@@ -72,10 +120,11 @@ public class SplashScreen extends Activity {
 
 	  					captures = commonMethods.createCapturesFolder();
 
+	  				foods = commonMethods.copyFoodsCSV(appContext.getContext());
  				
 	  				boolean createTableStatus = appContext.getDbHandler().insertOneRowInAllTables();
 
-	  				if (createTableStatus && databases && charts && recordings && captures && reports) {
+	  				if (createTableStatus && databases && charts && recordings && captures && reports && foods) {
 
 	  					nextClass = commonMethods.decideNextActivity();
 
@@ -120,6 +169,7 @@ public class SplashScreen extends Activity {
 							"T1DM says, severe error occurred !!!!",
 
 							Toast.LENGTH_LONG).show();
+	    	  notificationManager.cancel(100);
 	            finish();
 
 	      }

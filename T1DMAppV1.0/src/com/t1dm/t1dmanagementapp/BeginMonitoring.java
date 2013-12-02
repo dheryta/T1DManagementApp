@@ -165,8 +165,8 @@ public class BeginMonitoring extends Activity {
 		Calendar calendar = Calendar.getInstance();
 		reading.set_Timestamp(calendar.get(Calendar.HOUR_OF_DAY)+":"+calendar.get(Calendar.MINUTE));
 		int month = calendar.get(Calendar.MONTH)+1;
-		int date = calendar.get(Calendar.DATE);
-		reading.set_Date((calendar.get(Calendar.YEAR)+"-"+((month<10)?0+month:month)+"-"+((date<10)?0+date:date)));
+		int date = calendar.get(Calendar.DAY_OF_MONTH);
+		reading.set_Date((calendar.get(Calendar.YEAR)+"-"+((month<10)?"0"+month:month)+"-"+((date<10)?"0"+date:date)));
 		
 		if ( appContext.getDbHandler().insertBGReading(reading) >= 1)
 			retVal = true;

@@ -22,6 +22,7 @@ import org.achartengine.renderer.XYSeriesRenderer;
 
 
 
+
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
@@ -44,6 +45,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -60,7 +62,7 @@ public class ReadingsChart extends Activity {
 
 	private EditText etFromDate;
 	private EditText etToDate;
-	private Button btnSearch;
+	private ImageButton btnSearch;
 	private Calendar calendar;
 	private DatePickerDialog dpDialog;
 	
@@ -115,10 +117,20 @@ public class ReadingsChart extends Activity {
 		calendar = Calendar.getInstance();
 		etFromDate = (EditText)findViewById(R.id.etFromDate);
 		etFromDate.setInputType(InputType.TYPE_NULL); 
-		etFromDate.setText(calendar.get(Calendar.YEAR)+"-"+(calendar.get(Calendar.MONTH)+1)+"-"+calendar.get(Calendar.DAY_OF_MONTH));	
+		
+		int y, m, d;
+		y = calendar.get(Calendar.YEAR);
+		m = calendar.get(Calendar.MONTH)+1;
+		d = calendar.get(Calendar.DAY_OF_MONTH);
+		
+		String month = (m < 10)?("0"+ Integer.toString(m)):Integer.toString(m);
+		String day = (d < 10)?("0"+ Integer.toString(d)):Integer.toString(d);
+		String year = Integer.toString(y);
+		
+		etFromDate.setText(year+"-"+month+"-"+day);	
 		etToDate = (EditText)findViewById(R.id.etToDate);
 		etToDate.setInputType(InputType.TYPE_NULL); 
-		etToDate.setText(calendar.get(Calendar.YEAR)+"-"+(calendar.get(Calendar.MONTH)+1)+"-"+calendar.get(Calendar.DAY_OF_MONTH));
+		etToDate.setText(year+"-"+month+"-"+day);
 		
 		etFromDate.setOnClickListener(new OnClickListener() {
 			
@@ -138,7 +150,7 @@ public class ReadingsChart extends Activity {
 			}
 		});
 		
-		btnSearch = (Button)findViewById(R.id.btnSearch);
+		btnSearch = (ImageButton)findViewById(R.id.btnSearch);
 		btnSearch.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -212,6 +224,11 @@ public class ReadingsChart extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
+		List<MonitoringReadings> readings = appContext.getDbHandler().getMonitoringReadings(etFromDate.getText().toString(),
+				etToDate.getText().toString());
+		count = (readings!=null)? (readings.size()):0;
+		initializePlot(readings);
+		
 		if (mChartView == null) {
 			LinearLayout layout = (LinearLayout) findViewById(R.id.chart);
 			mChartView = ChartFactory.getLineChartView(this, mDataset,

@@ -90,7 +90,7 @@ public class UserDetailsActivity extends Activity {
 
 	private void loadUserDetails() {
 		UserDetails user = appContext.getDbHandler().getUserDetail();
-		if (user != null) {
+		if (user != null ) {
 			TextView tvTemp;
 			EditText etTemp;
 
@@ -113,6 +113,7 @@ public class UserDetailsActivity extends Activity {
 			etTemp.setText(user.get_EMERGENCY());
 
 			etTemp = (EditText) findViewById(R.id.txtName);
+			if (!user.get_NAME().equals("Dummy"))
 			etTemp.setText(user.get_NAME());
 		}
 	}

@@ -27,8 +27,8 @@ public class ScheduleAlarmReceiver extends BroadcastReceiver{
 	    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 	    i.setAction(intent.getAction());
 	    
-	    Intent intentAlarm = new Intent(context, HomeScreen.class);
-	     PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intentAlarm, 0);
+	   // Intent intentAlarm = new Intent(context, HomeScreen.class);
+	     PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, new Intent(), 0);
 
 	    commonMethods.showNotification(context, pendingIntent, ID, true, "T1DM", intent.getAction());
 	    context.startActivity(i);		

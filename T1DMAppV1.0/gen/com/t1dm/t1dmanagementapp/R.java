@@ -263,6 +263,7 @@ public final class R {
         public static final int rbSnacks=0x7f060058;
         public static final int rbStringDisableEmergency=0x7f06003c;
         public static final int rbStringEnableEmergency=0x7f06003b;
+        public static final int showInformation=0x7f06005c;
         public static final int textView=0x7f06002c;
         public static final int title_activity_ask_user=0x7f060001;
         public static final int title_activity_available_foods=0x7f060053;

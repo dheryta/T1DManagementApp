@@ -5,6 +5,9 @@ package com.t1dm.t1dmanagementapp;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -19,6 +22,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -98,6 +102,8 @@ public class CommonMethods {
 	
 	public final String RECORDING_NAME = "T1DM_RECORDING.3gp";
 	
+	public final String FOODS = "GL_GI_Database_PIPE.csv";
+	
 	public final String REPORT_NAME = "Report";
 
 	public final File APP_PATH = Environment.getExternalStorageDirectory();
@@ -114,6 +120,61 @@ public class CommonMethods {
 
 	public static final DatabaseHandler DATABASE_HANDLER = new DatabaseHandler();
 
+	public boolean copyFoodsCSV(Context context){
+		boolean status = false;
+
+		File fileFoods = new File(APP_PATH + File.separator + DB_FOLDER
+				+ File.separator + FOODS);
+		
+		File fileDB = new File(APP_PATH + File.separator + DB_FOLDER
+				+ File.separator + DB_NAME);
+		
+		if (fileDB.exists())
+			status = true;
+		else {
+			AssetManager assetManager = context.getAssets();
+			InputStream in = null;
+			OutputStream out = null;
+			// new File(APP_PATH + File.separator + DB_FOLDER);
+			String[] files = null;
+			try {
+				files = assetManager.list("");
+			} catch (Exception e) {
+
+			}
+
+			for (String filename : files) {
+
+				if (filename.contains("T1DM_DB")){
+						//|| filename.contains("GL_GI_Database_PIPE")) {
+					try {
+						// filename = GL_GI_Database_CSV.csv
+						in = assetManager.open(filename);
+						out = new FileOutputStream(APP_PATH + File.separator
+								+ DB_FOLDER + File.separator + filename);
+
+						byte[] buffer = new byte[1024];
+						int read;
+						while ((read = in.read(buffer)) != -1) {
+							out.write(buffer, 0, read);
+						}
+						status = true;
+					} catch (Exception e) {
+						status = false;
+					} finally {
+						try {
+							if (in != null)
+								in.close();
+							if (out != null)
+								out.close();
+						} catch (Exception e) {
+						}
+					}
+				}
+			}
+		}
+		return status;
+	}
 	
 	public Class<?> decideNextActivity()
 
@@ -350,12 +411,25 @@ public class CommonMethods {
 	private String prepareContent(String from, String to, long time){
 		StringBuilder content = new StringBuilder();
 		List<MonitoringReadings> readings = DATABASE_HANDLER.getMonitoringReadings(from, to);
-		List<ModelInsulin> insulinDosage = DATABASE_HANDLER.getInsulinDosage();
+		
+		UserDetails userDetails = DATABASE_HANDLER.getUserDetail();
+		String height = DATABASE_HANDLER.updateAndGetHeight("", "");
+		String weight = DATABASE_HANDLER.updateAndGetWeight("");
+		String gender = DATABASE_HANDLER.updateAndGetGender("");
+		
 		
 		content.append( "<!DOCTYPE html><html><body><h1>T1DM Report</h1><h2>From:" + from + 
-				"</h2><h2>To:" + to + "</h2><h3>Patient's Name: Dheryta, Dr. Name: Dr. P K Goyal<h3><h3>Height: 5'3'' Weight: 70Kgs<h3>"
-				+ "<p>Current Insulin Dosage</p>" );
+				"</h2><h2>To:" + to + "</h2><h3>Patient's Name: "+ userDetails.get_NAME() +
+				", Dr. Name: " + userDetails.get_DrNAME() +"</h3> "
+						+ "<h3>Height: "+ ((height==null || height.equals(""))?"EMPTY":height) 
+								+ " Weight: " + ((weight==null || weight.equals(""))?"EMPTY":weight) + "Kgs"
+								+ " Gender: " + ((gender==null || gender.equals(""))?"EMPTY":gender) 
+								+ " Age: " + userDetails.get_AGE() + "Years"
+										+ "</h3>");
 		
+		List<ModelInsulin> insulinDosage = DATABASE_HANDLER.getInsulinDosage();
+		if (insulinDosage.size()>0){
+		content.append("<p>Current Insulin Dosage</p>");
 		content.append("<table border=1><tr><td>Dose Time</td><td>Units</td></tr>");
 		
 		for(int i=0;i< insulinDosage.size();i++){
@@ -369,7 +443,26 @@ public class CommonMethods {
 			content.append("</tr>");
 		}
 		content.append("</table>");
-
+		}
+		
+		List<FoodModel> mealPlan = DATABASE_HANDLER.getMealPlan();
+		if (mealPlan.size()>0){
+		content.append("<p>Meal Plan</p>");
+		content.append("<table border=1><tr><td>Time</td><td>Food Details</td></tr>");
+		
+		for (int  i=0;i<mealPlan.size();i++){
+			content.append("<tr>");
+			content.append("<td>");
+			content.append(mealPlan.get(i).get_FoodType());
+			content.append("</td>");
+			content.append("<td>");
+			content.append(mealPlan.get(i).get_FoodName());
+			content.append("</td>");
+			content.append("</tr>");
+		}
+		content.append("</table>");
+		}
+		
 		if (time>0){
 			content.append(  "<p>Blood Sugar Monitoring</p><img src=\"cid:image_chart\" alt=\"T1DM Chart\"><p>Daily Recordings</p>");			
 		}

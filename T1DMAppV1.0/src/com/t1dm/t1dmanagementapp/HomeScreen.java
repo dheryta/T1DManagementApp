@@ -52,7 +52,7 @@ public class HomeScreen extends TabActivity implements OnClickListener {
         TabHost.TabSpec tab1 = tabHost.newTabSpec("Monitoring");
         //TabHost.TabSpec tab2 = tabHost.newTabSpec("Profile");
         TabHost.TabSpec tab3 = tabHost.newTabSpec("Schedules");
-        TabHost.TabSpec tab4 = tabHost.newTabSpec("Diet");
+        TabHost.TabSpec tab4 = tabHost.newTabSpec("Body Profile");
         TabHost.TabSpec tab2 = tabHost.newTabSpec("Trend");
         TabHost.TabSpec tab5 = tabHost.newTabSpec("Foods");
 
@@ -80,7 +80,7 @@ public class HomeScreen extends TabActivity implements OnClickListener {
         tab3.setIndicator("Schedules");
         tab3.setContent(new Intent(this,Schedules.class));
        
-        tab4.setIndicator("Diet");
+        tab4.setIndicator("Body Profile");
         tab4.setContent(new Intent(this,BodyRequirements.class));
         
         tab5.setIndicator("Foods");

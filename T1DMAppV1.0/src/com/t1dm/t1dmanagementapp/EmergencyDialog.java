@@ -9,6 +9,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.content.DialogInterface.OnClickListener;
 import android.location.Location;
 import android.location.LocationManager;
@@ -23,6 +24,7 @@ public class EmergencyDialog extends DialogFragment {
 	private GetUserLocation userCurrentLocation;
 	private CommonMethods commonMethods = new CommonMethods();
 	private T1DMApplication appContext;
+	private SharedPreferences sharedPrefs;
 	
 	public EmergencyDialog(Context context) {
 		this.context = context;
@@ -35,6 +37,8 @@ public class EmergencyDialog extends DialogFragment {
 	    public Dialog onCreateDialog(Bundle savedInstanceState) {
 	 	        
 	        getActivity().getWindow().addFlags(LayoutParams.FLAG_TURN_SCREEN_ON | LayoutParams.FLAG_DISMISS_KEYGUARD);
+	        
+	        sharedPrefs = this.context.getSharedPreferences(commonMethods.PREFS_NAME, commonMethods.MODE_PRIVATE);
 	         
 	        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 	 	        
@@ -50,8 +54,12 @@ public class EmergencyDialog extends DialogFragment {
 	               String userLocation = userCurrentLocation.getCompleteAddress();
 	               String emergencyNumber = appContext.getDbHandler().getEmergencyNumber();
 	               if (emergencyNumber != ""){
-	               SmsManager smsManager = SmsManager.getDefault();
-	           	   smsManager.sendTextMessage( emergencyNumber, null, message+userLocation, null, null);
+	               SmsManager smsManager = SmsManager.getDefault();	       
+	               if (userLocation.contains("Oops"))
+	            	   smsManager.sendTextMessage( emergencyNumber, null, message, null, null);
+	               else
+	            	   smsManager.sendTextMessage( emergencyNumber, null, message+userLocation, null, null);
+	               
 	           	   Toast.makeText(appContext, "T1DM says, location sent to " + emergencyNumber, Toast.LENGTH_SHORT).show();
 	               }else
 	            	   Toast.makeText(appContext, "T1DM says, oops no emergency contact found", Toast.LENGTH_SHORT).show();

@@ -24,7 +24,7 @@ public class SplashScreen extends Activity {
 
 	private CommonMethods commonMethods = new CommonMethods();
 	private T1DMApplication appContext;
-	final String PREFS_NAME = "T1DM_Prefs";
+	
 
 	private SharedPreferences sharedPrefs;
 
@@ -36,7 +36,7 @@ public class SplashScreen extends Activity {
 		appContext.setContext(getApplicationContext());
 		appContext.setDbHandler(new DatabaseHandler());
 		
-		sharedPrefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+		sharedPrefs = getSharedPreferences(commonMethods.PREFS_NAME, MODE_PRIVATE);
 
 		if (sharedPrefs.getBoolean("t1dm_first_time", true)) {
 			sharedPrefs.edit().putBoolean("t1dm_first_time", false).commit(); 

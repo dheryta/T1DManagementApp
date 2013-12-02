@@ -15,6 +15,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v4.app.NotificationCompat;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -35,6 +36,7 @@ public class ManageEmergencyModule extends Activity {
 	private T1DMApplication appContext;
 	private CommonMethods commonMethods = new CommonMethods();
 	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) { 
 		super.onCreate(savedInstanceState);
@@ -44,6 +46,8 @@ public class ManageEmergencyModule extends Activity {
 		
 		appContext = ((T1DMApplication) getApplication());
 		appContext.setDbHandler(new DatabaseHandler());
+		
+		
 			
 		btnChangeEmergency.setOnClickListener(new View.OnClickListener() {
 			

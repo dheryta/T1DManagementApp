@@ -94,8 +94,10 @@ public class CommonMethods {
 
 	public final String SUBTYPE_EXTRAS = "Other";
 
-	
+	public final String PREFS_NAME = "T1DM_Prefs";
 
+	public final int MODE_PRIVATE = 0;
+	
 	public final int DB_VERSION = 1;
 
 	public final String DB_NAME = "T1DM_DB";

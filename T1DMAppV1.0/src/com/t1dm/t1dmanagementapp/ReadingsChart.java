@@ -264,12 +264,12 @@ public class ReadingsChart extends Activity {
 					Toast.makeText(this,
 							"T1DM says, oops some error occurred !!!!",
 							Toast.LENGTH_SHORT).show();
-				finish();
+				
 			} else
 				Toast.makeText(this,
 						"T1DM says, oops no readings to plot !!!!",
 						Toast.LENGTH_SHORT).show();
-			finish();
+			
 			return true;
 		}
 		return super.onOptionsItemSelected(item);

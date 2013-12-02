@@ -106,5 +106,5 @@
     <string name="rbDinner">Dinner</string>
     <string name="action_addFood">Add to meal</string>
     <string name="title_activity_show_meal_plan">My Meal Plan</string>
-	<string name="showInformation">Food Information</string>
+	<string name="showInformation">Information</string>
 </resources>

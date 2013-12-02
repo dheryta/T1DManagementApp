@@ -38,11 +38,12 @@ public final class R {
         public static final int email=0x7f020003;
         public static final int ic_launcher=0x7f020004;
         public static final int large_image=0x7f020005;
-        public static final int search=0x7f020006;
-        public static final int search_white=0x7f020007;
-        public static final int speaker=0x7f020008;
-        public static final int speaker_extra=0x7f020009;
-        public static final int splash_image=0x7f02000a;
+        public static final int promo_graphic=0x7f020006;
+        public static final int search=0x7f020007;
+        public static final int search_white=0x7f020008;
+        public static final int speaker=0x7f020009;
+        public static final int speaker_extra=0x7f02000a;
+        public static final int splash_image=0x7f02000b;
     }
     public static final class id {
         public static final int Button01=0x7f0a0045;
@@ -52,6 +53,7 @@ public final class R {
         public static final int SlidingDrawer=0x7f0a0023;
         public static final int action_addFood=0x7f0a0059;
         public static final int action_settings=0x7f0a0058;
+        public static final int action_showInfo=0x7f0a005a;
         public static final int btnAdd=0x7f0a0032;
         public static final int btnCapture=0x7f0a0009;
         public static final int btnChangeEmergency=0x7f0a002a;
@@ -85,15 +87,15 @@ public final class R {
         public static final int imageView1=0x7f0a003c;
         public static final int listviewActivities_Menu=0x7f0a003e;
         public static final int listviewT1DM_Menu=0x7f0a004c;
-        public static final int menuAddNewBGCItem=0x7f0a005b;
-        public static final int menuAddNewExerciseItem=0x7f0a005e;
-        public static final int menuAddNewInsulinItem=0x7f0a005f;
-        public static final int menuAddNewMealItem=0x7f0a0060;
-        public static final int menuAddNewSchedule=0x7f0a005d;
-        public static final int menuAddNewSleepItem=0x7f0a0062;
-        public static final int menuDone=0x7f0a005a;
-        public static final int menuNextSchedule=0x7f0a005c;
-        public static final int menuSavePlot=0x7f0a0061;
+        public static final int menuAddNewBGCItem=0x7f0a005c;
+        public static final int menuAddNewExerciseItem=0x7f0a005f;
+        public static final int menuAddNewInsulinItem=0x7f0a0060;
+        public static final int menuAddNewMealItem=0x7f0a0061;
+        public static final int menuAddNewSchedule=0x7f0a005e;
+        public static final int menuAddNewSleepItem=0x7f0a0063;
+        public static final int menuDone=0x7f0a005b;
+        public static final int menuNextSchedule=0x7f0a005d;
+        public static final int menuSavePlot=0x7f0a0062;
         public static final int progressBar1=0x7f0a0048;
         public static final int ratingBar=0x7f0a0057;
         public static final int rbBreakfast=0x7f0a002d;
@@ -144,7 +146,7 @@ public final class R {
         public static final int txtEmergencyPhone=0x7f0a004e;
         public static final int txtName=0x7f0a004d;
         public static final int uploadingStatus=0x7f0a0041;
-        public static final int userDetails_Save=0x7f0a0063;
+        public static final int userDetails_Save=0x7f0a0064;
     }
     public static final class layout {
         public static final int activity_available_foods=0x7f030000;

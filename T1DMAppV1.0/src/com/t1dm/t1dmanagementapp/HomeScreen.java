@@ -8,12 +8,14 @@ import java.util.List;
 import android.R.color;
 import android.os.Bundle;
 import android.app.ActionBar.Tab;
+import android.app.Activity;
 import android.app.TabActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -22,6 +24,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SlidingDrawer;
 import android.widget.TabHost;
+import android.widget.TabHost.OnTabChangeListener;
 import android.widget.Toast;
 import android.widget.SlidingDrawer.OnDrawerCloseListener;
 import android.widget.SlidingDrawer.OnDrawerOpenListener;
@@ -36,6 +39,9 @@ public class HomeScreen extends TabActivity implements OnClickListener {
 	private SettingsArrayAdapter adapter;
 	private CommonMethods commonMethods = new CommonMethods();
 	private T1DMApplication appContext;
+	private ReadingsChart readingsChart = new ReadingsChart();
+	private BeginMonitoring monitoring = new BeginMonitoring();
+	private AvailableFoods foods = new AvailableFoods();
 	
 	//private Fragment emergencyModule = new ManageEmergencyModule();
 	
@@ -43,6 +49,7 @@ public class HomeScreen extends TabActivity implements OnClickListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		 super.onCreate(savedInstanceState);
+		 
          setContentView(R.layout.activity_home_screen);
 
          appContext = ((T1DMApplication) getApplicationContext());
@@ -94,6 +101,16 @@ public class HomeScreen extends TabActivity implements OnClickListener {
         tabHost.addTab(tab4);
         tabHost.addTab(tab5);
           
+    
+        tabHost.setOnTabChangedListener(new OnTabChangeListener() {
+			
+			@Override
+			public void onTabChanged(String tabId) {
+				if (tabId.equals("Monitoring") || tabId.equals("Trend") || tabId.equals("Foods"))
+					openOptionsMenu();
+				
+			}
+		});
         slideButton = (Button) findViewById(R.id.handle);
 		  slidingDrawer = (SlidingDrawer) findViewById(R.id.SlidingDrawer);
 		 
@@ -159,20 +176,56 @@ public class HomeScreen extends TabActivity implements OnClickListener {
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onPrepareOptionsMenu(Menu menu) {
 		 MenuInflater inflater = getMenuInflater();
-		   int tab = getTabHost().getCurrentTab();
-		   if (tab==1)
+		 TabHost tabHost = (TabHost)findViewById(android.R.id.tabhost);
+		   int tab = tabHost.getCurrentTab();
+		   menu.removeGroup(0);
+		   if (tab==0)
 		       inflater.inflate(R.menu.begin_monitoring, menu); 
-		   else if (tab==2)
+		   else if (tab==1)
 		       inflater.inflate(R.menu.readings_chart, menu);
-		   else if (tab==5)
+		   else if (tab==4)
 		       inflater.inflate(R.menu.available_foods, menu);
 		   
+	
+
+        return super.onPrepareOptionsMenu(menu);
+    }
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		Activity currentActivity;
+		switch (item.getItemId()) {
+		
+		case R.id.menuSavePlot:
+			currentActivity = (ReadingsChart)getLocalActivityManager().getCurrentActivity();
+						readingsChart.onOptionsItemSelected(item);
+			return true;
+		case R.id.action_addFood:
+			
+			   currentActivity = (AvailableFoods)getLocalActivityManager().getCurrentActivity();
+				currentActivity.onOptionsItemSelected(item);
+		
+				return true;
+		case R.id.menuDone:
+			
+			    currentActivity = (BeginMonitoring)getLocalActivityManager().getCurrentActivity();
+				currentActivity.onOptionsItemSelected(item);
+				return true;
+		}
+		return super.onOptionsItemSelected(item);
+		
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		
 		   
 		  return true;
 	}
 
+	
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub

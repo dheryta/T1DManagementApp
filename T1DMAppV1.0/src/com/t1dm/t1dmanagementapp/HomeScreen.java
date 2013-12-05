@@ -13,6 +13,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -159,9 +160,17 @@ public class HomeScreen extends TabActivity implements OnClickListener {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		//getMenuInflater().inflate(R.menu.home, menu);
-		return true;
+		 MenuInflater inflater = getMenuInflater();
+		   int tab = getTabHost().getCurrentTab();
+		   if (tab==1)
+		       inflater.inflate(R.menu.begin_monitoring, menu); 
+		   else if (tab==2)
+		       inflater.inflate(R.menu.readings_chart, menu);
+		   else if (tab==5)
+		       inflater.inflate(R.menu.available_foods, menu);
+		   
+		   
+		  return true;
 	}
 
 	@Override
